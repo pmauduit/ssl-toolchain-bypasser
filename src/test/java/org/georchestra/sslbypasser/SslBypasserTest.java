@@ -16,6 +16,9 @@ public class SslBypasserTest {
 
     @Before
     public void setUp() throws Exception {
+        // the main question is on how to avoid this call
+        // in the code, and ensures that it is initialized when
+        // the class is loaded.
         Class.forName(SslBypasser.class.getName());
     }
 

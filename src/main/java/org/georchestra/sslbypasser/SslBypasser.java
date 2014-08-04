@@ -5,16 +5,16 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
-
-
-
-
 public class SslBypasser {
 
     static {
         try {
             SslBypasser.disableCertificatesCheck();
         } catch (Exception e) {}
+    }
+
+    public static void main(String[] args) throws Exception {
+        SslBypasser.disableCertificatesCheck();
     }
 
     public static void disableCertificatesCheck() throws Exception {
