@@ -16,9 +16,6 @@ public class SslBypasserTest {
 
     @Before
     public void setUp() throws Exception {
-        // the main question is on how to avoid this call
-        // in the code, and ensures that it is initialized when
-        // the class is loaded.
         Class.forName(SslBypasser.class.getName());
     }
 
@@ -35,7 +32,6 @@ public class SslBypasserTest {
         try {
             htc.connect();
             String returnedPage = CharStreams.toString(new InputStreamReader(htc.getInputStream(), "UTF-8"));
-            System.out.println(returnedPage);
             assert (htc.getResponseCode() == HttpURLConnection.HTTP_OK);
         } finally {
             htc.disconnect();
