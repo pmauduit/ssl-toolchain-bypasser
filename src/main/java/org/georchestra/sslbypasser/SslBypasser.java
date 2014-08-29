@@ -1,5 +1,6 @@
 package org.georchestra.sslbypasser;
 
+import java.security.Security;
 import java.security.cert.X509Certificate;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -43,6 +44,9 @@ public class SslBypasser {
                 }
             }
         };
+        // Note: this would only work for this class and its daughters.
+        // to be looked at:
+        // https://code.google.com/p/misc-utils/wiki/JavaHttpsUrl
         SSLContext sc = SSLContext.getInstance("SSL");
         sc.init(null, trustAllCerts, new java.security.SecureRandom());
         HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());

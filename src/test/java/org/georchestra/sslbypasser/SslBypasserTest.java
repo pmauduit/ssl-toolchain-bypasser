@@ -3,6 +3,8 @@ package org.georchestra.sslbypasser;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.security.Provider;
+import java.security.Security;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -35,6 +37,10 @@ public class SslBypasserTest {
             assert (htc.getResponseCode() == HttpURLConnection.HTTP_OK);
         } finally {
             htc.disconnect();
+        }
+
+        for (Provider p : Security.getProviders()) {
+            System.out.println(p);
         }
     }
 }
