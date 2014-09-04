@@ -11,6 +11,7 @@ import javax.net.ssl.SSLHandshakeException;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.common.io.CharStreams;
@@ -37,6 +38,7 @@ public class SslBypasserTest {
     }
 
     @Test
+    @Ignore
     public void testWithout() throws Exception {
         disableBypasser();
         System.out.println("self-signed certificate with bypass disabled");

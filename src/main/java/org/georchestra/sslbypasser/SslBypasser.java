@@ -21,35 +21,23 @@ import org.apache.commons.logging.LogFactory;
 public class SslBypasser {
     private static final Log LOG = LogFactory.getLog(SslBypasser.class.getName());
 
-    static {
-        try {
-            System.out.println("Default providers before insertion:");
-            for (java.security.Provider p: Security.getProviders()) {
-                System.out.println(p);
-            }
-            SslBypasser.disableCertificatesCheck();
+    private static boolean activated = false;
 
-            System.out.println("\n\n\nDefault providers after insertion:");
-            for (java.security.Provider p: Security.getProviders()) {
-                System.out.println(p);
-            }
-            SslBypasser.disableCertificatesCheck();
-
-
-        } catch (Exception e) {
-            LOG.error(e);
-        }
-    }
 
     public static void disableCertificatesCheck() throws Exception {
         XTrustProvider.install();
+        activated = true;
         LOG.warn("SSL bypass in effect - Every SSL checks from this context WILL BE DISCARDED !");
-
     }
 
+    public static boolean isActivated() {
+        return activated;
+    }
+    // Relying on the testsuite, this does not work as for now ...
     public static void enableCertificatesCheck() throws Exception {
         XTrustProvider.remove();
-        LOG.warn("Default algorithm set - SSL checks will act as default JVM does.");
+        activated = false;
+        LOG.warn("Default algorithm set - SSL checks should act as default JVM does.");
     }
     public static final class XTrustProvider extends java.security.Provider {
 
