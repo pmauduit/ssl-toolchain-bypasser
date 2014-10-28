@@ -13,13 +13,8 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactorySpi;
 import javax.net.ssl.X509TrustManager;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-
 
 public class SslBypasser {
-    private static final Log LOG = LogFactory.getLog(SslBypasser.class.getName());
 
     private static boolean activated = false;
 
@@ -27,7 +22,7 @@ public class SslBypasser {
     public static void disableCertificatesCheck() throws Exception {
         XTrustProvider.install();
         activated = true;
-        LOG.warn("SSL bypass in effect - Every SSL checks from this context WILL BE DISCARDED !");
+        System.out.println("SSL bypass in effect - Every SSL checks from this context WILL BE DISCARDED !");
     }
 
     public static boolean isActivated() {
@@ -37,7 +32,7 @@ public class SslBypasser {
     public static void enableCertificatesCheck() throws Exception {
         XTrustProvider.remove();
         activated = false;
-        LOG.warn("Default algorithm set - SSL checks should act as default JVM does.");
+        System.out.println("Default algorithm set - SSL checks should act as default JVM does.");
     }
     public static final class XTrustProvider extends java.security.Provider {
 
